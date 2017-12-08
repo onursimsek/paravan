@@ -1,0 +1,22 @@
+{
+    "name": "onursimsek/payment-system",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Onur Şimşek",
+            "email": "posta@onursimsek.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^6.3"
+    },
+    "suggest": {
+        "onursimsek/binlist-php": "Find bank account from bin number"
+    },
+    "autoload": {
+        "psr-4": {
+            "Paravan\\": "src/"
+        }
+    }
+}
