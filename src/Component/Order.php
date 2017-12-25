@@ -1,8 +1,6 @@
 <?php
 
-namespace Paravan\Components;
-
-use Paravan\Component\OrderInterface;
+namespace Paravan\Component;
 
 class Order implements OrderInterface
 {

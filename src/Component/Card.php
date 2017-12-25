@@ -1,8 +1,6 @@
 <?php
 
-namespace Paravan\Components;
-
-use Paravan\Component\CardInterface;
+namespace Paravan\Component;
 
 class Card implements CardInterface
 {

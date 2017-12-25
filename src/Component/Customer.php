@@ -1,6 +1,6 @@
 <?php
 
-namespace Paravan\Components;
+namespace Paravan\Component;
 
 class Customer
 {
