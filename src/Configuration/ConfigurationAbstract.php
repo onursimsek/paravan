@@ -4,43 +4,29 @@ namespace Paravan\Configuration;
 
 abstract class ConfigurationAbstract
 {
-    private $preAuthEndpoint;
-
-    private $provisionEndpoint;
-
-    private $merchantId;
+    /**
+     * @var string
+     */
+    protected $gateway;
 
     /**
-     * @return mixed
+     * @var string
      */
-    public function getPreAuthEndpoint()
+    protected $merchantId;
+
+    /**
+     * @return string
+     */
+    public function getGateway(): string
     {
-        return $this->preAuthEndpoint;
+        return $this->gateway;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getProvisionEndpoint()
-    {
-        return $this->provisionEndpoint;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getMerchantId()
+    public function getMerchantId(): string
     {
         return $this->merchantId;
-    }
-
-    /**
-     * @param mixed $merchantId
-     * @return ConfigurationAbstract
-     */
-    public function setMerchantId($merchantId): ConfigurationAbstract
-    {
-        $this->merchantId = $merchantId;
-        return $this;
     }
 }
