@@ -2,15 +2,14 @@
 
 namespace Paravan\Gateway;
 
-use Paravan\Component\CardInterface;
-use Paravan\Component\CustomerInterface;
-use Paravan\Component\OrderInterface;
+use Paravan\Paravan;
+use Paravan\Request;
 
 interface GatewayInterface
 {
-    public function setOrder(OrderInterface $order);
+    public function getParavan(): Paravan;
 
-    public function setCard(CardInterface $card);
+    public function preAuth(Request $request);
 
-    public function setCustomer(CustomerInterface $customer);
+    public function pay(Request $request);
 }
