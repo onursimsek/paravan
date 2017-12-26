@@ -1,4 +1,14 @@
 <?php
+/**
+ * This file is part of the onursimsek/paravan library
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * @copyright Copyright (c) Onur Şimşek <posta@onursimsek.com>
+ * @license https://opensource.org/licenses/GPL-3.0 GNU General Public License version 3
+ * @link https://github.com/onursimsek/paravan GitHub
+ */
 
 namespace Paravan;
 
@@ -11,14 +21,35 @@ use Paravan\Exception\GatewayException;
 use Paravan\Gateway\GatewayInterface;
 use Paravan\ResponseParser\ResponseParserInterface;
 
+/**
+ * Payment system for Turkish Banks
+ *
+ * Supported banks
+ *  - Garanti 3D (Gvp)
+ *  - Finansbank 3D (Nestpay)
+ *
+ * @package Paravan
+ */
 class Paravan
 {
+    /**
+     * @var Customer
+     */
     protected $customer;
 
+    /**
+     * @var Card
+     */
     protected $card;
 
+    /**
+     * @var Order
+     */
     protected $order;
 
+    /**
+     * @var Transaction
+     */
     protected $transaction;
 
     /**
@@ -51,7 +82,7 @@ class Paravan
     /**
      * @return ConfigurationAbstract
      */
-    public function getConfiguration()
+    public function getConfiguration(): ConfigurationAbstract
     {
         return $this->configuration;
     }
@@ -71,7 +102,7 @@ class Paravan
     /**
      * @return Customer
      */
-    public function getCustomer()
+    public function getCustomer(): Card
     {
         return $this->customer;
     }
@@ -93,7 +124,7 @@ class Paravan
     /**
      * @return Card
      */
-    public function getCard()
+    public function getCard(): Card
     {
         return $this->card;
     }
@@ -114,7 +145,7 @@ class Paravan
     /**
      * @return Order
      */
-    public function getOrder()
+    public function getOrder(): Order
     {
         return $this->order;
     }
@@ -136,7 +167,7 @@ class Paravan
     /**
      * @return Transaction
      */
-    public function getTransaction()
+    public function getTransaction(): Transaction
     {
         return $this->transaction;
     }
@@ -149,7 +180,7 @@ class Paravan
     /**
      * @return ResponseParserInterface
      */
-    public function pay()
+    public function pay(): ResponseParserInterface
     {
         return $this->gateway->pay(new Request());
     }
