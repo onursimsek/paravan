@@ -3,6 +3,7 @@
 namespace Paravan;
 
 use GuzzleHttp\Client;
+use Psr\Http\Message\ResponseInterface;
 
 class Request
 {
@@ -21,12 +22,17 @@ class Request
         ]);
     }
 
-    public function send(string $endpoint, array $params)
+    /**
+     * @param string $endpoint
+     * @param array $params
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function send(string $endpoint, array $params): ResponseInterface
     {
         $request = $this->client->request('POST', $endpoint, [
             'form_params' => $params,
         ]);
 
-        return $request->getBody()->getContents();
+        return $request;
     }
 }
