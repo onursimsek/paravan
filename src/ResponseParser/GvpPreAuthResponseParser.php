@@ -4,7 +4,7 @@ namespace Paravan\ResponseParser;
 
 use Psr\Http\Message\ResponseInterface;
 
-class GvpPreAuthResponseParser
+class GvpPreAuthResponseParser implements PreAuthResponseInterface
 {
     /**
      * @var ResponseInterface
@@ -16,7 +16,12 @@ class GvpPreAuthResponseParser
         $this->response = $response;
     }
 
-    public function redirect()
+    public function isRedirect(): bool
+    {
+        return true;
+    }
+
+    public function getRawResponse(): string
     {
         return $this->response->getBody()->getContents();
     }

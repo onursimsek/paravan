@@ -9,50 +9,49 @@ class GvpRequestBuilder extends RequestBuilder
     public function preAuth()
     {
         return [
-            'mode' => $this->paravan->getConfiguration()->getMode(),
-            'apiversion' => $this->paravan->getConfiguration()->getVersion(),
-            'terminalprovuserid' => $this->paravan->getConfiguration()->getProvisionUser(),
-            'terminaluserid' => $this->paravan->getConfiguration()->getTerminalUserId(),
-            'terminalmerchantid' => $this->paravan->getConfiguration()->getMerchantId(),
-            'txntype' => $this->paravan->getConfiguration()->getType(),
+            'mode' => $this->configuration->getMode(),
+            'apiversion' => $this->configuration->getVersion(),
+            'terminalprovuserid' => $this->configuration->getProvisionUser(),
+            'terminaluserid' => $this->configuration->getTerminalUserId(),
+            'terminalmerchantid' => $this->configuration->getMerchantId(),
+            'txntype' => $this->configuration->getType(),
             'cardnumber' => $this->paravan->getCard()->getCardNumber(),
             'cardexpiredatemonth' => $this->formattedMonth($this->paravan->getCard()->getMonth()),
             'cardexpiredateyear' => $this->paravan->getCard()->getYear(),
             'cardcvv2' => $this->paravan->getCard()->getCvv(),
             'txnamount' => $this->formattedAmount($this->paravan->getOrder()->getAmount()),
-            'txncurrencycode' => $this->paravan->getConfiguration()->getCurrencyCode(),
+            'txncurrencycode' => $this->configuration->getCurrencyCode(),
             'txninstallmentcount' => $this->formattedInstallment($this->paravan->getOrder()->getInstallment()),
             'orderid' => $this->paravan->getOrder()->getId(),
-            'terminalid' => $this->paravan->getConfiguration()->getTerminalId(),
-            'successurl' => $this->paravan->getConfiguration()->getSuccessUrl(),
-            'errorurl' => $this->paravan->getConfiguration()->getErrorUrl(),
+            'terminalid' => $this->configuration->getTerminalId(),
+            'successurl' => $this->configuration->getSuccessUrl(),
+            'errorurl' => $this->configuration->getErrorUrl(),
             'customeremailaddress' => $this->paravan->getCustomer()->getEmail(),
             'customeripaddress' => $this->paravan->getCustomer()->getIp(),
-            'secure3dsecuritylevel' => $this->paravan->getConfiguration()->getSecurityLevel(),
+            'secure3dsecuritylevel' => $this->configuration->getSecurityLevel(),
             'secure3dhash' => $this->hashDataForPreAuth(),
         ];
     }
 
     protected function hashDataForPreAuth()
     {
-        $configuration = $this->paravan->getConfiguration();
-        $security = strtoupper(sha1($configuration->getProvisionPassword() . str_pad($configuration->getTerminalId(), 9, 0, STR_PAD_LEFT)));
+        $security = strtoupper(sha1($this->configuration->getProvisionPassword() . $this->formattedTerminalId($this->configuration->getTerminalId())));
 
-        return strtoupper(sha1($configuration->getTerminalId() . $this->paravan->getOrder()->getId() . $this->formattedAmount($this->paravan->getOrder()->getAmount()) . $configuration->getSuccessUrl() . $configuration->getErrorUrl() . $configuration->getType() . $this->formattedInstallment($this->paravan->getOrder()->getInstallment()) . $configuration->getStoreKey() . $security));
+        return strtoupper(sha1($this->configuration->getTerminalId() . $this->paravan->getOrder()->getId() . $this->formattedAmount($this->paravan->getOrder()->getAmount()) . $this->configuration->getSuccessUrl() . $this->configuration->getErrorUrl() . $this->configuration->getType() . $this->formattedInstallment($this->paravan->getOrder()->getInstallment()) . $this->configuration->getStoreKey() . $security));
     }
 
     public function pay()
     {
         $data = [
-            'Mode' => $this->paravan->getConfiguration()->getMode(),
-            'Version' => $this->paravan->getConfiguration()->getVersion(),
+            'Mode' => $this->configuration->getMode(),
+            'Version' => $this->configuration->getVersion(),
             'ChannelCode' => '',
             'Terminal' => [
-                'ProvUserID' => $this->paravan->getConfiguration()->getProvisionUser(),
+                'ProvUserID' => $this->configuration->getProvisionUser(),
                 'HashData' => $this->hashDataForPay(),
-                'UserID' => $this->paravan->getConfiguration()->getTerminalUserId(),
-                'ID' => $this->paravan->getConfiguration()->getTerminalId(),
-                'MerchantID' => $this->paravan->getConfiguration()->getMerchantId(),
+                'UserID' => $this->configuration->getTerminalUserId(),
+                'ID' => $this->configuration->getTerminalId(),
+                'MerchantID' => $this->configuration->getMerchantId(),
             ],
             'Customer' => [
                 'IPAddress' => $this->paravan->getCustomer()->getIp(),
@@ -82,12 +81,12 @@ class GvpRequestBuilder extends RequestBuilder
                 ]
             ],
             'Transaction' => [
-                'Type' => $this->paravan->getConfiguration()->getType(),
+                'Type' => $this->configuration->getType(),
                 'InstallmentCnt' => $this->formattedInstallment($this->paravan->getOrder()->getInstallment()),
                 'Amount' => $this->formattedAmount($this->paravan->getOrder()->getAmount()),
-                'CurrencyCode' => $this->paravan->getConfiguration()->getCurrencyCode(),
-                'CardholderPresentCode' => $this->paravan->getConfiguration()->getCardholderPresentCode(),
-                'MotoInd' => $this->paravan->getConfiguration()->getMotoInd(),
+                'CurrencyCode' => $this->configuration->getCurrencyCode(),
+                'CardholderPresentCode' => $this->configuration->getCardholderPresentCode(),
+                'MotoInd' => $this->configuration->getMotoInd(),
                 'Secure3D' => [
                     'AuthenticationCode' => $this->paravan->getTransaction()->getAuthenticationCode(),
                     'SecurityLevel' => $this->paravan->getTransaction()->getEci(),
@@ -104,9 +103,9 @@ class GvpRequestBuilder extends RequestBuilder
 
     protected function hashDataForPay()
     {
-        $secureData = strtoupper(sha1($this->paravan->getConfiguration()->getProvisionPassword() . $this->formattedTerminalId($this->paravan->getConfiguration()->getTerminalId())));
+        $secureData = strtoupper(sha1($this->configuration->getProvisionPassword() . $this->formattedTerminalId($this->configuration->getTerminalId())));
 
-        return strtoupper(sha1($this->paravan->getOrder()->getId() . $this->paravan->getConfiguration()->getTerminalId() . $this->formattedAmount($this->paravan->getOrder()->getAmount()) . $secureData));
+        return strtoupper(sha1($this->paravan->getOrder()->getId() . $this->configuration->getTerminalId() . $this->formattedAmount($this->paravan->getOrder()->getAmount()) . $secureData));
     }
 
     protected function formattedAmount($amount)
