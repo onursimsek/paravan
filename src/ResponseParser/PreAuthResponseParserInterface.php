@@ -2,7 +2,7 @@
 
 namespace Paravan\ResponseParser;
 
-interface PreAuthResponseInterface extends ResponseParserInterface
+interface PreAuthResponseParserInterface extends ResponseParserInterface
 {
     public function isRedirect(): bool;
 }

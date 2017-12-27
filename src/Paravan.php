@@ -20,7 +20,7 @@ use Paravan\Configuration\ConfigurationAbstract;
 use Paravan\Exception\GatewayException;
 use Paravan\Gateway\GatewayInterface;
 use Paravan\ResponseParser\PayResponseParserInterface;
-use Paravan\ResponseParser\PreAuthResponseInterface;
+use Paravan\ResponseParser\PreAuthResponseParserInterface;
 
 /**
  * Payment system for Turkish Banks
@@ -174,9 +174,9 @@ class Paravan
     }
 
     /**
-     * @return PreAuthResponseInterface
+     * @return PreAuthResponseParserInterface
      */
-    public function preAuth(): PreAuthResponseInterface
+    public function preAuth(): PreAuthResponseParserInterface
     {
         return $this->gateway->preAuth(new Request());
     }

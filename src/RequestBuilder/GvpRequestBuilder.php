@@ -9,6 +9,7 @@ class GvpRequestBuilder extends RequestBuilder
     public function preAuth()
     {
         return [
+            'gateway' => $this->configuration->getGateway(),
             'mode' => $this->configuration->getMode(),
             'apiversion' => $this->configuration->getVersion(),
             'terminalprovuserid' => $this->configuration->getProvisionUser(),

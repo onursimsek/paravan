@@ -4,7 +4,7 @@ namespace Paravan\ResponseParser;
 
 use Psr\Http\Message\ResponseInterface;
 
-class GvpPreAuthResponseParser implements PreAuthResponseInterface
+class GvpPreAuthResponseParser implements PreAuthResponseParserInterface
 {
     /**
      * @var ResponseInterface
