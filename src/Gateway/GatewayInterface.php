@@ -11,5 +11,7 @@ interface GatewayInterface
 
     public function preAuth(Request $request);
 
+    public function callbackValidation(array $params);
+
     public function pay(Request $request);
 }

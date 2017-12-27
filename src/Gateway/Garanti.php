@@ -2,7 +2,7 @@
 
 namespace Paravan\Gateway;
 
-class Garanti extends GvpAbstract implements GatewayInterface
+class Garanti extends GvpAbstract
 {
     protected $preAuthUrl = 'https://sanalposprov.garanti.com.tr/servlet/gt3dengine';
 

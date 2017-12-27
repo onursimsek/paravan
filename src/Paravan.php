@@ -19,6 +19,7 @@ use Paravan\Component\Transaction;
 use Paravan\Configuration\ConfigurationAbstract;
 use Paravan\Exception\GatewayException;
 use Paravan\Gateway\GatewayInterface;
+use Paravan\ResponseParser\CallbackParserInterface;
 use Paravan\ResponseParser\PayResponseParserInterface;
 use Paravan\ResponseParser\PreAuthResponseParserInterface;
 
@@ -179,6 +180,15 @@ class Paravan
     public function preAuth(): PreAuthResponseParserInterface
     {
         return $this->gateway->preAuth(new Request());
+    }
+
+    /**
+     * @param array $params
+     * @return CallbackParserInterface
+     */
+    public function callbackValidation(array $params): CallbackParserInterface
+    {
+        return $this->gateway->callbackValidation($params);
     }
 
     /**
