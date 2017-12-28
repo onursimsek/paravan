@@ -4,7 +4,7 @@ namespace Paravan\ResponseParser;
 
 use Psr\Http\Message\ResponseInterface;
 
-class GvpPayResponseParser implements ResponseParserInterface
+class GvpPayResponseParser implements PayResponseParserInterface
 {
     protected $response;
 

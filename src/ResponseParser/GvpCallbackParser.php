@@ -24,12 +24,12 @@ class GvpCallbackParser implements CallbackParserInterface
 
     public function getErrorMessage(): string
     {
-        return $this->params['mdStatus'];
+        return $this->params['mderrormessage'];
     }
 
     public function getErrorCode(): string
     {
-        return $this->params['mderrormessage'];
+        return $this->params['mdstatus'];
     }
 
     public function isValid(): bool
@@ -39,7 +39,7 @@ class GvpCallbackParser implements CallbackParserInterface
 
     private function isParameterValid(): bool
     {
-        switch ($this->params['mdStatus']) {
+        switch ($this->params['mdstatus']) {
             case 1:
             case 2:
             case 3:
