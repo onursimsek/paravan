@@ -36,4 +36,9 @@ class GvpPayResponseParser implements PayResponseParserInterface
     {
         return $this->response->getBody()->getContents();
     }
+
+    public function getTransactionId(): string
+    {
+        return $this->parsed->Transaction->RetrefNum;
+    }
 }

@@ -9,4 +9,6 @@ interface PayResponseParserInterface extends ResponseParserInterface
     public function getErrorMessage(): string;
 
     public function getErrorCode(): string;
+
+    public function getTransactionId(): string;
 }
