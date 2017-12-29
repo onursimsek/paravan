@@ -102,7 +102,7 @@ class NestpayRequestBuilder extends RequestBuilder
         ];
 
         return [
-            'data' => $this->array2Xml(new \SimpleXMLElement('<CC5Request/>'), $data),
+            'data' => $this->array2Xml(new \SimpleXMLElement('<CC5Request/>'), $data)->asXML(),
         ];
     }
 

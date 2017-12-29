@@ -39,4 +39,9 @@ class NestpayPayResponseParser implements ResponseParserInterface
     {
         return $this->response->getBody()->getContents();
     }
+
+    public function getTransactionId(): string
+    {
+        return (string)$this->parsed->TransId;
+    }
 }
