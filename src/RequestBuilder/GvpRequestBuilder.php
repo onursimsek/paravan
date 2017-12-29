@@ -98,7 +98,7 @@ class GvpRequestBuilder extends RequestBuilder
         ];
 
         return [
-            'data' => $this->array2Xml(new \SimpleXMLElement('<GVPSRequest/>'), $data),
+            'data' => $this->array2Xml(new \SimpleXMLElement('<GVPSRequest/>'), $data)->asXML(),
         ];
     }
 
