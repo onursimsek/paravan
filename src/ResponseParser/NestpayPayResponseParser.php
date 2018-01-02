@@ -4,7 +4,7 @@ namespace Paravan\ResponseParser;
 
 use Psr\Http\Message\ResponseInterface;
 
-class NestpayPayResponseParser implements ResponseParserInterface
+class NestpayPayResponseParser implements PayResponseParserInterface
 {
     /**
      * @var ResponseInterface
