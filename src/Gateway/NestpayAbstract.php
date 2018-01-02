@@ -5,6 +5,7 @@ namespace Paravan\Gateway;
 use Paravan\Request;
 use Paravan\RequestBuilder\NestpayRequestBuilder;
 use Paravan\ResponseParser\NestpayCallbackParser;
+use Paravan\ResponseParser\NestpayPayResponseParser;
 use Paravan\ResponseParser\NestpayPreAuthResponseParser;
 
 abstract class NestpayAbstract extends GatewayAbstract implements GatewayInterface
@@ -21,6 +22,6 @@ abstract class NestpayAbstract extends GatewayAbstract implements GatewayInterfa
 
     public function pay(Request $request)
     {
-        return $request->send($this->provisionUrl, (new NestpayRequestBuilder($this))->pay());
+        return new NestpayPayResponseParser($request->send($this->provisionUrl, (new NestpayRequestBuilder($this))->pay()));
     }
 }
