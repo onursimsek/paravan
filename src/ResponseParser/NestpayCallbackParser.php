@@ -34,7 +34,7 @@ class NestpayCallbackParser implements CallbackParserInterface
 
     public function isValid(): bool
     {
-        return $this->isParameterValid() || $this->isRequestValid();
+        return $this->isParameterValid() && $this->isRequestValid();
     }
 
     private function isParameterValid(): bool
