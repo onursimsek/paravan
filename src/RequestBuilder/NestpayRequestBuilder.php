@@ -36,6 +36,7 @@ class NestpayRequestBuilder extends RequestBuilder
             'Ecom_Payment_Card_ExpDate_Month' => $this->formattedMonth($this->paravan->getCard()->getMonth()),
             'Ecom_Payment_Card_ExpDate_Year' => $this->formattedYear($this->paravan->getCard()->getYear()),
             'cardType' => 1,
+            'islemtipi' => self::TYPE_AUTH,
         ];
     }
 
