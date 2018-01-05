@@ -4,6 +4,9 @@ namespace Paravan\Configuration;
 
 class NestpayConfiguration extends ConfigurationAbstract
 {
+    const SECURITY_LEVEL_3D = '3d';
+    const SECURITY_LEVEL_3D_PAY = '3d_pay';
+
     /**
      * @var string
      */

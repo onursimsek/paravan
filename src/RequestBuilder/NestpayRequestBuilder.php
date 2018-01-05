@@ -2,6 +2,8 @@
 
 namespace Paravan\RequestBuilder;
 
+use Paravan\Configuration\NestpayConfiguration;
+
 class NestpayRequestBuilder extends RequestBuilder
 {
     use XmlBuilder;
@@ -17,6 +19,19 @@ class NestpayRequestBuilder extends RequestBuilder
     const TYPE_PRE_AUTH = 'PreAuth';
 
     public function preAuth()
+    {
+        switch (mb_convert_case($this->configuration->getSecurityLevel(), MB_CASE_LOWER)) {
+            case NestpayConfiguration::SECURITY_LEVEL_3D_PAY:
+                return $this->postPreAuth();
+                break;
+            case NestpayConfiguration::SECURITY_LEVEL_3D:
+            default:
+                return $this->xmlPreAuth();
+                break;
+        }
+    }
+
+    private function postPreAuth()
     {
         return [
             'gateway' => $this->configuration->getGateway(),
@@ -38,6 +53,21 @@ class NestpayRequestBuilder extends RequestBuilder
             'cardType' => 1,
             'islemtipi' => self::TYPE_AUTH,
         ];
+    }
+
+    private function xmlPreAuth()
+    {
+        return $this->array2Xml(new \SimpleXMLElement('<CC5Request/>'), [
+            'Name' => $this->configuration->getProvisionUser(),
+            'Password' => $this->configuration->getProvisionPassword(),
+            'ClientId' => $this->configuration->getMerchantId(),
+            'Type' => self::TYPE_PRE_AUTH,
+            'Total' => $this->formattedAmount($this->paravan->getOrder()->getAmount()),
+            'Currency' => $this->configuration->getCurrencyCode(),
+            'Number' => $this->paravan->getTransaction()->getMd(),
+            'Expires' => '',
+            'Cvv2Val' => '',
+        ])->asXML();
     }
 
     protected function hashDataForPreAuth()
