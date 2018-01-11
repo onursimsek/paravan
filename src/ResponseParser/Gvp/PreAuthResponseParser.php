@@ -1,10 +1,11 @@
 <?php
 
-namespace Paravan\ResponseParser;
+namespace Paravan\ResponseParser\Gvp;
 
+use Paravan\ResponseParser\PreAuthResponseParserInterface;
 use Psr\Http\Message\ResponseInterface;
 
-class GvpPreAuthResponseParser implements PreAuthResponseParserInterface
+class PreAuthResponseParser implements PreAuthResponseParserInterface
 {
     /**
      * @var ResponseInterface
@@ -16,11 +17,17 @@ class GvpPreAuthResponseParser implements PreAuthResponseParserInterface
         $this->response = $response;
     }
 
+    /**
+     * @return bool
+     */
     public function isRedirect(): bool
     {
         return true;
     }
 
+    /**
+     * @return string
+     */
     public function getRawResponse(): string
     {
         return $this->response->getBody()->getContents();

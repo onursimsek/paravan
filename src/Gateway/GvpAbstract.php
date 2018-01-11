@@ -3,33 +3,38 @@
 namespace Paravan\Gateway;
 
 use Paravan\Request;
-use Paravan\RequestBuilder\GvpRequestBuilder;
-use Paravan\ResponseParser\GvpCallbackParser;
-use Paravan\ResponseParser\GvpPayResponseParser;
-use Paravan\ResponseParser\GvpPreAuthResponseParser;
+use Paravan\RequestBuilder\Gvp\PayRequestBuilder;
+use Paravan\RequestBuilder\Gvp\PreAuthRequestBuilder;
+use Paravan\ResponseParser\Gvp\CallbackParser;
+use Paravan\ResponseParser\Gvp\PayResponseParser;
+use Paravan\ResponseParser\Gvp\PreAuthResponseParser;
 
 abstract class GvpAbstract extends GatewayAbstract implements GatewayInterface
 {
     /**
      * @param Request $request
-     * @return GvpPreAuthResponseParser
+     * @return PreAuthResponseParser
      */
     public function preAuth(Request $request)
     {
-        return new GvpPreAuthResponseParser($request->send($this->preAuthUrl, (new GvpRequestBuilder($this))->preAuth()));
+        return new PreAuthResponseParser($request->send($this->preAuthUrl, (new PreAuthRequestBuilder($this))->preAuth()));
     }
 
+    /**
+     * @param array $params
+     * @return CallbackParser
+     */
     public function callbackValidation(array $params)
     {
-        return new GvpCallbackParser($this->configuration, $params);
+        return new CallbackParser($this->configuration, $params);
     }
 
     /**
      * @param Request $request
-     * @return GvpPayResponseParser
+     * @return PayResponseParser
      */
     public function pay(Request $request)
     {
-        return new GvpPayResponseParser($request->send($this->provisionUrl, (new GvpRequestBuilder($this))->pay()));
+        return new PayResponseParser($request->send($this->provisionUrl, (new PayRequestBuilder($this))->pay()));
     }
 }

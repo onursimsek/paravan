@@ -4,7 +4,12 @@ namespace Paravan\RequestBuilder;
 
 trait XmlBuilder
 {
-    private function array2Xml(\SimpleXMLElement $document, $data)
+    /**
+     * @param \SimpleXMLElement $document
+     * @param $data
+     * @return \SimpleXMLElement
+     */
+    private function array2Xml(\SimpleXMLElement $document, $data): \SimpleXMLElement
     {
         foreach ($data as $key => $value) {
             if (is_array($value)) {

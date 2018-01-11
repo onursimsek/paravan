@@ -1,10 +1,11 @@
 <?php
 
-namespace Paravan\ResponseParser;
+namespace Paravan\ResponseParser\Gvp;
 
 use Paravan\Configuration\ConfigurationAbstract;
+use Paravan\ResponseParser\CallbackParserInterface;
 
-class GvpCallbackParser implements CallbackParserInterface
+class CallbackParser implements CallbackParserInterface
 {
     /**
      * @var ConfigurationAbstract
@@ -22,21 +23,33 @@ class GvpCallbackParser implements CallbackParserInterface
         $this->params = $params;
     }
 
+    /**
+     * @return string
+     */
     public function getErrorMessage(): string
     {
         return $this->params['mderrormessage'];
     }
 
+    /**
+     * @return string
+     */
     public function getErrorCode(): string
     {
         return $this->params['mdstatus'];
     }
 
+    /**
+     * @return bool
+     */
     public function isValid(): bool
     {
         return $this->isParameterValid() && $this->isRequestValid();
     }
 
+    /**
+     * @return bool
+     */
     private function isParameterValid(): bool
     {
         switch ($this->params['mdstatus']) {
@@ -51,6 +64,9 @@ class GvpCallbackParser implements CallbackParserInterface
         return false;
     }
 
+    /**
+     * @return bool
+     */
     private function isRequestValid(): bool
     {
         $paramsString = '';
