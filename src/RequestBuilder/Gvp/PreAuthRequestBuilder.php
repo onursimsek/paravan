@@ -88,8 +88,9 @@ class PreAuthRequestBuilder extends GvpRequestBuilder
             'txnamount' => $this->formattedAmount($this->paravan->getOrder()->getAmount()),
             'txncurrencycode' => $this->configuration->getCurrencyCode(),
             'txninstallmentcount' => $this->formattedInstallment($this->paravan->getOrder()->getInstallment()),
-            'bnsuseflag' => $this->configuration->getBonusUseFlag(),
-            'fbbuseflag' => $this->configuration->getFirmBonusUseFlag(),
+            'bnsuseflag' => $this->configuration->canUseBonus(),
+            'fbbuseflag' => $this->configuration->canUseFirmBonus(),
+            'chequeuseflag' => $this->configuration->canUseCheque(),
             'txntimeoutperiod' => $this->configuration->getTimeoutPeriod(),
             'orderid' => $this->paravan->getOrder()->getId(),
             'successurl' => $this->configuration->getSuccessUrl(),
@@ -98,6 +99,9 @@ class PreAuthRequestBuilder extends GvpRequestBuilder
             'customeripaddress' => $this->paravan->getCustomer()->getIp(),
             'secure3dsecuritylevel' => $this->configuration->getSecurityLevel(),
             'secure3dhash' => $this->hashDataForPreAuth(),
+            'txntimestamp' => time(),
+            'refreshtime' => '1',
+            'lang' => 'tr',
         ];
     }
 }
