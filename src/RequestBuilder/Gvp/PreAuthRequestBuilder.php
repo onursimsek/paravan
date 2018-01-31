@@ -2,31 +2,24 @@
 
 namespace Paravan\RequestBuilder\Gvp;
 
+use Paravan\Gateway\GvpAbstract;
 use Paravan\RequestBuilder\GvpRequestBuilder;
 
 class PreAuthRequestBuilder extends GvpRequestBuilder
 {
-    const SECURITY_LEVEL_3D = '3D';
-
-    const SECURITY_LEVEL_3D_PAY = '3D_PAY',
-        SECURITY_LEVEL_3D_FULL = '3D_FULL',
-        SECURITY_LEVEL_3D_HALF = '3D_HALF';
-
-    const SECURITY_LEVEL_CUSTUM_PAY = 'CUSTOM_PAY';
-
     /**
      * @return array
      */
     public function preAuth(): array
     {
         switch (mb_convert_case($this->configuration->getSecurityLevel(), MB_CASE_UPPER)) {
-            case self::SECURITY_LEVEL_CUSTUM_PAY:
+            case GvpAbstract::SECURITY_LEVEL_CUSTUM_PAY:
                 return $this->securityLevelCustomPay();
                 break;
-            case self::SECURITY_LEVEL_3D:
-            case self::SECURITY_LEVEL_3D_PAY:
-            case self::SECURITY_LEVEL_3D_FULL:
-            case self::SECURITY_LEVEL_3D_HALF:
+            case GvpAbstract::SECURITY_LEVEL_3D:
+            case GvpAbstract::SECURITY_LEVEL_3D_PAY:
+            case GvpAbstract::SECURITY_LEVEL_3D_FULL:
+            case GvpAbstract::SECURITY_LEVEL_3D_HALF:
             default:
                 return $this->securityLevel3D();
                 break;
