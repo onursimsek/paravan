@@ -1,10 +1,11 @@
 <?php
 
-namespace Paravan\ResponseParser;
+namespace Paravan\ResponseParser\Nestpay;
 
+use Paravan\ResponseParser\PayResponseParserInterface;
 use Psr\Http\Message\ResponseInterface;
 
-class NestpayPayResponseParser implements PayResponseParserInterface
+class PayResponseParser implements PayResponseParserInterface
 {
     /**
      * @var ResponseInterface
