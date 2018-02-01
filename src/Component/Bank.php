@@ -6,4 +6,5 @@ class Bank
 {
     const GARANTI = 'Garanti';
     const FINANSBANK = 'Finansbank';
+    const AKBANK = 'Akbank';
 }
