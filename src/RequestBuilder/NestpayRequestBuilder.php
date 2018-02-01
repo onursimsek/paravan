@@ -2,6 +2,8 @@
 
 namespace Paravan\RequestBuilder;
 
+use Paravan\Gateway\NestpayAbstract;
+
 abstract class NestpayRequestBuilder extends RequestBuilder
 {
     protected function formattedYear($year)
@@ -16,6 +18,8 @@ abstract class NestpayRequestBuilder extends RequestBuilder
             $this->formattedAmount($this->paravan->getOrder()->getAmount()) .
             $this->configuration->getSuccessUrl() .
             $this->configuration->getErrorUrl() .
+            NestpayAbstract::TYPE_AUTH .
+            $this->paravan->getOrder()->getInstallment() .
             $this->configuration->getRnd() .
             $this->configuration->getStoreKey();
 
