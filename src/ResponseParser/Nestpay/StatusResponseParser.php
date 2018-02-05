@@ -24,7 +24,7 @@ class StatusResponseParser
      */
     public function isPaid(): bool
     {
-        return $this->parsed->Response == 'Accepted';
+        return $this->parsed->Response == 'Approved';
     }
 
     /**
