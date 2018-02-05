@@ -3,9 +3,12 @@
 namespace Paravan\RequestBuilder\Nestpay;
 
 use Paravan\RequestBuilder\NestpayRequestBuilder;
+use Paravan\RequestBuilder\XmlBuilder;
 
 class StatusRequestBuilder extends NestpayRequestBuilder
 {
+    use XmlBuilder;
+
     public function status()
     {
         return [
