@@ -38,6 +38,22 @@ class StatusResponseParser
     /**
      * @return string
      */
+    public function getTransactionId(): string
+    {
+        return $this->parsed->TransId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getErrorMessage(): string
+    {
+        return $this->parsed->ErrMsg;
+    }
+
+    /**
+     * @return string
+     */
     public function getRawResponse(): string
     {
         return $this->response->getBody()->getContents();

@@ -198,4 +198,9 @@ class Paravan
     {
         return $this->gateway->pay(new Request());
     }
+
+    public function status()
+    {
+        return $this->gateway->status(new Request());
+    }
 }
