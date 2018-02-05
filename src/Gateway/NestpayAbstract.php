@@ -5,9 +5,11 @@ namespace Paravan\Gateway;
 use Paravan\Request;
 use Paravan\RequestBuilder\Nestpay\PayRequestBuilder;
 use Paravan\RequestBuilder\Nestpay\PreAuthRequestBuilder;
+use Paravan\RequestBuilder\Nestpay\StatusRequestBuilder;
 use Paravan\ResponseParser\Nestpay\CallbackParser;
 use Paravan\ResponseParser\Nestpay\PayResponseParser;
 use Paravan\ResponseParser\Nestpay\PreAuthResponseParser;
+use Paravan\ResponseParser\Nestpay\StatusResponseParser;
 
 abstract class NestpayAbstract extends GatewayAbstract implements GatewayInterface
 {
@@ -50,8 +52,12 @@ abstract class NestpayAbstract extends GatewayAbstract implements GatewayInterfa
         return new PayResponseParser($request->send($this->provisionUrl, (new PayRequestBuilder($this))->pay()));
     }
 
+    /**
+     * @param Request $request
+     * @return StatusResponseParser
+     */
     public function status(Request $request)
     {
-
+        return new StatusResponseParser($request->send($this->queryingUrl, (new StatusRequestBuilder($this))->status()));
     }
 }
