@@ -49,4 +49,9 @@ abstract class NestpayAbstract extends GatewayAbstract implements GatewayInterfa
     {
         return new PayResponseParser($request->send($this->provisionUrl, (new PayRequestBuilder($this))->pay()));
     }
+
+    public function status(Request $request)
+    {
+
+    }
 }

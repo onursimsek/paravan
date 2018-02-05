@@ -20,7 +20,25 @@ class PayRequestBuilder extends NestpayRequestBuilder
         }
     }
 
-    public function securityLevel3DPay(): array
+    protected function securityLevel3DPay(): array
+    {
+        $data = [
+            'Name' => $this->configuration->getProvisionUser(),
+            'Password' => $this->configuration->getProvisionPassword(),
+            'ClientId' => $this->configuration->getMerchantId(),
+            'OrderId' => $this->paravan->getOrder()->getId(),
+            'Mode' => 'P',
+            'Extra' => [
+                'ORDERSTATUS' => 'SOR'
+            ],
+        ];
+
+        return [
+            'data' => $this->array2Xml(new \SimpleXMLElement('<CC5Request/>'), $data)->asXML(),
+        ];
+    }
+
+    protected function securityLevel3D(): array
     {
         $data = [
             'Name' => $this->configuration->getProvisionUser(),
