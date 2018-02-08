@@ -23,7 +23,7 @@ class PayResponseParser implements PayResponseParserInterface
      */
     public function isSuccess(): bool
     {
-        return (boolean)$this->parsed->Transaction->Response->ReasonCode == '00';
+        return ($this->parsed->Transaction->Response->ReasonCode == '00');
     }
 
     /**
@@ -31,7 +31,7 @@ class PayResponseParser implements PayResponseParserInterface
      */
     public function getErrorMessage(): string
     {
-        return $this->parsed->Transaction->Response->ErrorMsg;
+        return (string)$this->parsed->Transaction->Response->ErrorMsg;
     }
 
     /**
@@ -39,7 +39,7 @@ class PayResponseParser implements PayResponseParserInterface
      */
     public function getErrorCode(): string
     {
-        return $this->parsed->Transaction->Response->ReasonCode;
+        return (string)$this->parsed->Transaction->Response->ReasonCode;
     }
 
     /**
@@ -47,7 +47,7 @@ class PayResponseParser implements PayResponseParserInterface
      */
     public function getRawResponse(): string
     {
-        return $this->response->getBody()->getContents();
+        return $this->parsed->asXML();
     }
 
     /**
@@ -55,6 +55,6 @@ class PayResponseParser implements PayResponseParserInterface
      */
     public function getTransactionId(): string
     {
-        return $this->parsed->Transaction->RetrefNum;
+        return (string)$this->parsed->Transaction->RetrefNum;
     }
 }

@@ -27,6 +27,11 @@ abstract class GatewayAbstract
      */
     protected $provisionUrl;
 
+    /**
+     * @var string
+     */
+    protected $queryingUrl;
+
     public function __construct(Paravan $paravan)
     {
         $this->paravan = $paravan;

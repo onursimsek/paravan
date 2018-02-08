@@ -1,15 +1,17 @@
 <?php
 
-namespace Paravan\ResponseParser;
+namespace Paravan\ResponseParser\Nestpay;
 
+
+use Paravan\ResponseParser\PreAuthResponseParserInterface;
 use Psr\Http\Message\ResponseInterface;
 
-class NestpayPreAuthResponseParser implements PreAuthResponseParserInterface
+class PreAuthResponseParser implements PreAuthResponseParserInterface
 {
     /**
      * @var ResponseInterface
      */
-    private $response;
+    protected $response;
 
     public function __construct(ResponseInterface $response)
     {

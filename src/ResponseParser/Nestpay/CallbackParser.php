@@ -1,10 +1,11 @@
 <?php
 
-namespace Paravan\ResponseParser;
+namespace Paravan\ResponseParser\Nestpay;
 
 use Paravan\Configuration\ConfigurationAbstract;
+use Paravan\ResponseParser\CallbackParserInterface;
 
-class NestpayCallbackParser implements CallbackParserInterface
+class CallbackParser implements CallbackParserInterface
 {
     /**
      * @var ConfigurationAbstract
