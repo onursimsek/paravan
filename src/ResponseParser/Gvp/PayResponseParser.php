@@ -47,7 +47,7 @@ class PayResponseParser implements PayResponseParserInterface
      */
     public function getRawResponse(): string
     {
-        return $this->response->getBody()->getContents();
+        return $this->parsed->asXML();
     }
 
     /**
