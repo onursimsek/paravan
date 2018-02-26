@@ -76,10 +76,6 @@ class CallbackParser implements CallbackParserInterface
 
         $hash = base64_encode(pack('H*', sha1($paramsString . $this->configuration->getStoreKey())));
 
-        if ($this->params['hash'] == $hash) {
-            return true;
-        }
-
-        return false;
+        return $this->params['hash'] == $hash;
     }
 }

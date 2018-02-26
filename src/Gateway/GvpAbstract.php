@@ -17,7 +17,7 @@ abstract class GvpAbstract extends GatewayAbstract implements GatewayInterface
         SECURITY_LEVEL_3D_FULL = '3D_FULL',
         SECURITY_LEVEL_3D_HALF = '3D_HALF';
 
-    const SECURITY_LEVEL_CUSTUM_PAY = 'CUSTOM_PAY';
+    const SECURITY_LEVEL_CUSTOM_PAY = 'CUSTOM_PAY';
 
     /**
      * @param Request $request

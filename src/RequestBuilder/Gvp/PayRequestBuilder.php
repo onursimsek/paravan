@@ -16,7 +16,7 @@ class PayRequestBuilder extends GvpRequestBuilder
     public function pay(): array
     {
         switch (mb_convert_case($this->configuration->getSecurityLevel(), MB_CASE_UPPER)) {
-            case GvpAbstract::SECURITY_LEVEL_CUSTUM_PAY:
+            case GvpAbstract::SECURITY_LEVEL_CUSTOM_PAY:
                 // Ödeme zaten yapılmıştır kontrol edilir
                 return $this->securityLevelCustomPay();
                 break;
