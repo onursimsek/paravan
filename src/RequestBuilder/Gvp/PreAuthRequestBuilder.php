@@ -13,7 +13,7 @@ class PreAuthRequestBuilder extends GvpRequestBuilder
     public function preAuth(): array
     {
         switch (mb_convert_case($this->configuration->getSecurityLevel(), MB_CASE_UPPER)) {
-            case GvpAbstract::SECURITY_LEVEL_CUSTUM_PAY:
+            case GvpAbstract::SECURITY_LEVEL_CUSTOM_PAY:
                 return $this->securityLevelCustomPay();
                 break;
             case GvpAbstract::SECURITY_LEVEL_3D:
